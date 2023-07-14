@@ -2,9 +2,13 @@ const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema(
   {
-    name: {
+    firstName: {
       type: String,
-      required: [true, 'Please add a name'],
+      required: [true, 'Please add a first name'],
+    },
+    lastName: {
+      type: String,
+      required: [true, 'Please add a first name'],
     },
     email: {
       type: String,
@@ -15,6 +19,22 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add a password'],
     },
+    phoneNumber: {
+      type: String,
+      required: [true, 'Please add a phone number'],
+    },
+    accountType: {
+      type: String,
+      required: [true, 'Please add a account type'],
+    },
+    birthday: {
+      type: String,
+      required: [true, 'Please add a birthday'],
+    },
+    employerCode: {
+      type: String,
+      // required: [true, 'Please add a password'],
+    },
   },
   {
     timestamps: true,
@@ -22,22 +42,22 @@ const userSchema = mongoose.Schema(
 )
 
 module.exports = mongoose.model('User', userSchema)
-// firstName lastName phoneNumber accountType address birthday
+// firstName lastName email password phoneNumber accountType address birthday employerCode
 
 
-// busniess account 
-// id busniessName type email phoneNumber1 phoneNumber2 address city country image owenrId
+// business account 
+// id businessName type email phoneNumber1 phoneNumber2 address city country image owenrId
 
 //employer
-// id accountId busniessId type code
+// id accountId businessId type code
 
 //Services
-// id serviceId busniessId name  time
+// id serviceId businessId name  time
 
 //worktime
-// id busniessId day opentime closetime breakFrom breakTo
+// id businessId day opentime closetime breakFrom breakTo
 
 //Vacations
-// id busniessId type employerId date fromClock toClock
+// id businessId type employerId date fromClock toClock
 
 //busniessSettings
