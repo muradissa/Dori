@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const colors = require('colors');
+const cors = require('cors');
+
 const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
@@ -12,6 +14,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Enable CORS middleware
+app.use(cors({
+  allowedHeaders: 'Content-Type',
+}));
 
 app.use('/api/goals', require('./routes/goalRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));

@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema(
     },
     lastName: {
       type: String,
-      required: [true, 'Please add a first name'],
+      required: [true, 'Please add a last name'],
     },
     email: {
       type: String,
@@ -22,6 +22,15 @@ const userSchema = mongoose.Schema(
     phoneNumber: {
       type: String,
       required: [true, 'Please add a phone number'],
+      unique: true,
+    },
+    country: {
+      type: String,
+      required: [true, 'Please add a account type'],
+    },
+    address: {
+      type: String,
+      required: [true, 'Please add a account type'],
     },
     accountType: {
       type: String,

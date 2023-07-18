@@ -10,13 +10,21 @@ const User = require('../models/userModel')
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName ,lastName, email, password ,phoneNumber , accountType,address ,birthday ,employerCode} = req.body
+  // const { firstName ,lastName, email, password ,phoneNumber , accountType,address ,birthday ,employerCode} = req.body ;
+  const { firstName ,lastName, email, password ,confirmPassword,phoneNumber , country,address ,birthday } = req.body ;
 
-  if (!firstName  || !lastName  || !email || !password || !phoneNumber || !accountType || !address || !birthday || !employerCode) {
+
+  // if (!firstName  || !lastName  || !email || !password || !phoneNumber || !accountType  || !country || !address || !birthday || !employerCode) {
+  //   res.status(400)
+  //   throw new Error('Please add all fields')
+  // }
+
+  if (!firstName  || !lastName  || !email || !password || !confirmPassword || !phoneNumber  || !country || !address || !birthday ) {
     res.status(400)
+    console.log(confirmPassword)
     throw new Error('Please add all fields')
   }
-
+  
   // Check if user email exists
   const userExists = await User.findOne({ email })
   if (userExists) {
@@ -46,6 +54,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword,
     phoneNumber,
     accountType : "user",
+    country,
     address,
     birthday,
     employerCode: generateCode,
