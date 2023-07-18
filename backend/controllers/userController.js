@@ -10,42 +10,29 @@ const User = require('../models/userModel')
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  // const { firstName ,lastName, email, password ,phoneNumber , accountType,address ,birthday ,employerCode} = req.body ;
+
   const { firstName ,lastName, email, password ,confirmPassword,phoneNumber , country,address ,birthday } = req.body ;
-
-
-  // if (!firstName  || !lastName  || !email || !password || !phoneNumber || !accountType  || !country || !address || !birthday || !employerCode) {
-  //   res.status(400)
-  //   throw new Error('Please add all fields')
-  // }
-
   if (!firstName  || !lastName  || !email || !password || !confirmPassword || !phoneNumber  || !country || !address || !birthday ) {
     res.status(400)
-    console.log(confirmPassword)
     throw new Error('Please add all fields')
   }
-  
   // Check if user email exists
   const userExists = await User.findOne({ email })
   if (userExists) {
     res.status(400)
     throw new Error('User already exists')
   }
-
   // Check if user phone number exists
   const userExists2 = await User.findOne({ phoneNumber })
   if (userExists2) {
     res.status(400)
     throw new Error('User phone number already exists')
   }
-
   // Hash password
   const salt = await bcrypt.genSalt(10)
   const hashedPassword = await bcrypt.hash(password, salt)
-
-  //const asdasd
+  // generate Employer Code
   const generateCode = generateEmployerCode();
-
   // Create user
   const user = await User.create({
     firstName,
@@ -59,7 +46,6 @@ const registerUser = asyncHandler(async (req, res) => {
     birthday,
     employerCode: generateCode,
   })
-
   if (user) {
     res.status(201).json({
       _id: user.id,
@@ -74,15 +60,15 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
+
+
 // @desc    Authenticate a user
 // @route   POST /api/users/login
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
-
   // Check for user email
   const user = await User.findOne({ email })
-
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
@@ -96,12 +82,27 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 })
 
+
 // @desc    Get user data
 // @route   GET /api/users/me
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user)
 })
+
+
+// @desc    Logout user / clear cookie
+// @route   POST /api/users/logout
+// @access  Public
+const logoutUser = asyncHandler(async(req, res) => {
+  console.log('logged out')
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: 'Logged out successfully' });
+});
+
 
 // Generate JWT
 const generateToken = (id) => {
@@ -127,4 +128,5 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
+  logoutUser,
 }
