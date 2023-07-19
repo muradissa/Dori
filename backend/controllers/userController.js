@@ -95,7 +95,6 @@ const getMe = asyncHandler(async (req, res) => {
 // @route   POST /api/users/logout
 // @access  Public
 const logoutUser = asyncHandler(async(req, res) => {
-  console.log('logged out')
   res.cookie('jwt', '', {
     httpOnly: true,
     expires: new Date(0),

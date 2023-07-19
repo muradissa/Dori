@@ -55,7 +55,7 @@ module.exports = mongoose.model('User', userSchema)
 
 
 // business account 
-// id businessName type email phoneNumber1 phoneNumber2 address city country image owenrId
+// id businessCode businessName type email phoneNumber1 phoneNumber2 address city country image owenrId
 
 //employer
 // id accountId businessId type code
