@@ -1,11 +1,12 @@
 const express = require('express')
 const routerVacation = express.Router()
 const {
-  registerUser,
-  loginUser,
-  getMe,
-  logoutUser
-} = require('../controllers/userController')
+  getVacations,
+  getAllVacations,
+  addVacation,
+  updateVacation,
+  deleteVacation
+} = require('../controllers/vacationController')
 const { protect } = require('../middleware/authMiddleware')
 
 routerVacation.get('/getVacations', protect, getVacations)
