@@ -1,16 +1,16 @@
 const express = require('express')
 const routerWorkTime = express.Router()
 const {
-  registerUser,
-  loginUser,
-  getMe,
-  logoutUser
+  getWorkTimes,
+  getAllWorkTimes,
+  createWorkTime,
+  updateWorkTime
 } = require('../controllers/userController')
 const { protect } = require('../middleware/authMiddleware')
 
 routerWorkTime.get('/getWorkTimes', protect, getWorkTimes)
-
 routerWorkTime.get('/getAllWorkTimes', protect, getAllWorkTimes)
+routerWorkTime.post('/createWorkTime',protect ,createWorkTime)
 routerWorkTime.post('/updateWorkTime',protect ,updateWorkTime)
 
 

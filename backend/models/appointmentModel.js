@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-const wotkTimeSchema = mongoose.Schema(
+
+//Appointment
+const appointmentSchema = mongoose.Schema(
   {
     userId: {
         type: String,
@@ -11,6 +13,14 @@ const wotkTimeSchema = mongoose.Schema(
       required: [true],
     },
     employeeId: {
+      type: String,
+      required: [true],
+    },
+    businessCode: {
+      type: String,
+      required: [true],
+    },
+    employeeCode: {
       type: String,
       required: [true],
     },
@@ -46,4 +56,4 @@ const wotkTimeSchema = mongoose.Schema(
   },
 )
 
-module.exports = mongoose.model('Booking', wotkTimeSchema)
+module.exports = mongoose.model('Booking', appointmentSchema)
