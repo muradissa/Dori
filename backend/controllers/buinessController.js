@@ -73,8 +73,10 @@ const getBusinessInfo = asyncHandler(async (req, res) => {
 
 
 const createBusinessAccount = asyncHandler(async (req, res) => {
-  
+
 })
+
+
 const updateBusinessAccountInfo = asyncHandler(async (req, res) => {})
 const updateBusinessAccountType = asyncHandler(async (req, res) => {})
 const getBusinessSummuryForToday = asyncHandler(async (req, res) => {})
